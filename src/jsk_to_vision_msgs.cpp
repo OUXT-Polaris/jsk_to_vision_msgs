@@ -6,9 +6,20 @@ JskToVisionMsgs::JskToVisionMsgs(ros::NodeHandle nh,ros::NodeHandle pnh)
     pnh_ = pnh;
     pnh_.param<bool>("convert_3d_detection", convert_3d_detection_, false);
     pnh_.param<std::string>("vision_info_topic", vision_info_topic_, "vision_info");
+    
 }
 
 JskToVisionMsgs::~JskToVisionMsgs()
+{
+
+}
+
+void JskToVisionMsgs::detectionCallback(const vision_msgs::Detection3D::ConstPtr msg)
+{
+
+}
+
+void JskToVisionMsgs::detectionCallback(const jsk_recognition_msgs::BoundingBoxArray::ConstPtr msg)
 {
 
 }
