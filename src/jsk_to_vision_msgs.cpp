@@ -29,6 +29,7 @@ namespace jsk_to_vision_msgs
     void JskToVisionMsgs::visionInfoCallback(const vision_msgs::VisionInfo::ConstPtr msg)
     {
         parser_ptr_->parseFromRosMessage(*msg);
+        classes_ = parser_ptr_->getClasses();
     }
 }
 
