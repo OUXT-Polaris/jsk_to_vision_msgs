@@ -8,6 +8,9 @@ find_package(catkin REQUIRED COMPONENTS
   jsk_recognition_msgs
   roscpp
   vision_msgs
+  pluginlib
+  nodelet
+  vision_info_server
 )
 
 catkin_package(
@@ -22,6 +25,11 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(jsk_to_vision_msgs_node src/jsk_to_vision_msgs_node.cpp src/jsk_to_vision_msgs.cpp)
+add_library(jsk_to_vision_msgs src/jsk_to_vision_msgs)
+target_link_libraries(jsk_to_vision_msgs ${catkin_LIBRARIES})
+class_loader_hide_library_symbols(jsk_to_vision_msgs)
+add_dependencies(jsk_to_vision_msgs ${catkin_EXPORTED_TARGETS})
+
+add_executable(jsk_to_vision_msgs_node src/jsk_to_vision_msgs_node.cpp)
 target_link_libraries(jsk_to_vision_msgs_node ${catkin_LIBRARIES})
 add_dependencies(jsk_to_vision_msgs_node ${catkin_EXPORTED_TARGETS})

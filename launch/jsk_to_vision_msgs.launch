@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="jsk_to_vision_msgs" type="jsk_to_vision_msgs_node" name="jsk_to_vision_msgs_node" output="log" respawn="false" respawn_delay="0">
+        
+    </node>
+</launch>
