@@ -11,12 +11,13 @@ find_package(catkin REQUIRED COMPONENTS
   pluginlib
   nodelet
   vision_info_server
+  message_filters
 )
 
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES jsk_to_vision_msgs
-  CATKIN_DEPENDS jsk_recognition_msgs roscpp vision_msgs
+  CATKIN_DEPENDS jsk_recognition_msgs roscpp vision_msgs message_filters
 #  DEPENDS system_lib
 )
 
