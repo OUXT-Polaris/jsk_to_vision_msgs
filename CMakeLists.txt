@@ -15,7 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 catkin_package(
   INCLUDE_DIRS include
-#  LIBRARIES jsk_to_vision_msgs
+  LIBRARIES jsk_to_vision_msgs
   CATKIN_DEPENDS jsk_recognition_msgs roscpp vision_msgs
 #  DEPENDS system_lib
 )
@@ -33,3 +33,18 @@ add_dependencies(jsk_to_vision_msgs ${catkin_EXPORTED_TARGETS})
 add_executable(jsk_to_vision_msgs_node src/jsk_to_vision_msgs_node.cpp)
 target_link_libraries(jsk_to_vision_msgs_node ${catkin_LIBRARIES})
 add_dependencies(jsk_to_vision_msgs_node ${catkin_EXPORTED_TARGETS})
+
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
+
+install(
+  TARGETS jsk_to_vision_msgs jsk_to_vision_msgs_node
+  RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+)
+
+foreach(dir config launch)
+  install(DIRECTORY ${dir}/
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/${dir})
+endforeach(dir)

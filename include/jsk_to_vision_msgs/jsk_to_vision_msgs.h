@@ -4,12 +4,9 @@
 // Headers in ROS
 #include <ros/ros.h>
 #include <nodelet/nodelet.h>
-#include <vision_msgs/VisionInfo.h>
-#include <vision_msgs/Detection2D.h>
-#include <vision_msgs/Detection3D.h>
+#include <vision_msgs/Detection2DArray.h>
+#include <jsk_recognition_msgs/RectArray.h>
 #include <jsk_recognition_msgs/BoundingBoxArray.h>
-#include <jsk_recognition_msgs/ClassificationResult.h>
-#include <vision_info_server/vision_info_parser.h>
 
 // Headers in Boost
 #include <boost/optional.hpp>
@@ -24,16 +21,12 @@ namespace jsk_to_vision_msgs
     protected:
         void onInit();
     private:
-        void visionInfoCallback(const vision_msgs::VisionInfo::ConstPtr msg);
-        void detectionCallback(const jsk_recognition_msgs::ClassificationResult::ConstPtr msg);
-        void detectionCallback(const jsk_recognition_msgs::BoundingBoxArray::ConstPtr msg);
-        bool convert_3d_detection_;
-        std::string vision_info_topic_;
-        boost::optional<std::map<int,std::string> > classes_;
+        void rectArrayCallback(const jsk_recognition_msgs::RectArray::ConstPtr msg);
         ros::NodeHandle nh_;
         ros::NodeHandle pnh_;
-        ros::Subscriber vision_info_sub_;
-        std::unique_ptr<vision_info_parser::VisionInfoParser> parser_ptr_;
+        ros::Subscriber rect_array_sub_;
+        std::string rect_array_topic_;
+        ros::Publisher detection_pub_;
     };
 }
 
