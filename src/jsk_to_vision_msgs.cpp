@@ -36,6 +36,7 @@ namespace jsk_to_vision_msgs
         for(auto itr = jsk_bbox->boxes.begin(); itr != jsk_bbox->boxes.end(); itr++)
         {
             vision_msgs::Detection3D detection;
+            detection.header = jsk_bbox->header;
             detection.bbox.center = itr->pose;
             detection.bbox.size = itr->dimensions;
             detection.detection_id = unique_id::toMsg(unique_id::fromRandom());
