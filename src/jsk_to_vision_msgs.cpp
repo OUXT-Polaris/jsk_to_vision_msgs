@@ -28,6 +28,7 @@ namespace jsk_to_vision_msgs
             detection.bbox.size_x = (double)itr->width;
             detection.bbox.size_y = (double)itr->height;
             detection.is_tracking = false;
+            detection.detection_id = unique_id::toMsg(unique_id::fromRandom());
             detection2d_msg.detections.push_back(detection);
         }
         vision_msgs::Detection3DArray detection3d_msg;
@@ -37,6 +38,7 @@ namespace jsk_to_vision_msgs
             vision_msgs::Detection3D detection;
             detection.bbox.center = itr->pose;
             detection.bbox.size = itr->dimensions;
+            detection.detection_id = unique_id::toMsg(unique_id::fromRandom());
             detection3d_msg.detections.push_back(detection);
         }
         detection2d_pub_.publish(detection2d_msg);
