@@ -6,6 +6,8 @@ namespace jsk_to_vision_msgs
     {
         nh_ = getNodeHandle();
         pnh_ = getPrivateNodeHandle();
+        pnh_.param<double>("padding_ratio_width", padding_ratio_width_, 0.0);
+        pnh_.param<double>("padding_ratio_height", padding_ratio_height_, 0.0);
         detection2d_pub_ = pnh_.advertise<vision_msgs::Detection2DArray>("output/detection_2d",1);
         detection3d_pub_ = pnh_.advertise<vision_msgs::Detection3DArray>("output/detection_3d",1);
         cluster_rect_sub_ = std::make_shared<message_filters::Subscriber<jsk_recognition_msgs::RectArray> >(pnh_, "input/rect", 10);
@@ -25,8 +27,8 @@ namespace jsk_to_vision_msgs
             detection.bbox.center.theta = 0;
             detection.bbox.center.x = (double)itr->x+0.5*(double)itr->width;
             detection.bbox.center.y = (double)itr->y+0.5*(double)itr->height;
-            detection.bbox.size_x = (double)itr->width;
-            detection.bbox.size_y = (double)itr->height;
+            detection.bbox.size_x = (double)itr->width*(1.0+padding_ratio_width_);
+            detection.bbox.size_y = (double)itr->height*(1.0+padding_ratio_width_);
             detection.is_tracking = false;
             detection.detection_id = unique_id::toMsg(unique_id::fromRandom());
             detection2d_msg.detections.push_back(detection);

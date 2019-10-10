@@ -37,6 +37,8 @@ namespace jsk_to_vision_msgs
         std::shared_ptr<message_filters::Subscriber<jsk_recognition_msgs::BoundingBoxArray> > cluster_bbox_sub_;
         std::shared_ptr<message_filters::Synchronizer<SyncPolicy> > sync_ptr_;
         void callback(const jsk_recognition_msgs::RectArray::ConstPtr jsk_rect,const jsk_recognition_msgs::BoundingBoxArray::ConstPtr jsk_bbox);
+        double padding_ratio_width_;
+        double padding_ratio_height_;
     };
 }
 
